@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<style>
+  body {
+	user-select:none;
+	text-align: center;
+	background-color:lightgray;
+  }
+  
+  header {
+  font-size: 80px;
+  color: black;
+  }
+
+  #score {
+    font-size: 60px;
+    font-weight: bold;
+    color: green;
+}
+  #zycia {
+	text-align: center;
+    font-size: 60px;
+    font-weight: bold;
+    color: green;
+}
+  #opis {
+    font-size: 45px;
+    font-weight: bold;
+    color: red;
+}
+  #zegar {
+    font-size: 60px;
+    font-weight: bold;
+    color: black;
+}
+aside {
+  width: 10%;
+  padding-left: 15px;
+  margin-left: 15px;
+  float: right;
+  font-style: italic;
+  background-color: lightgray;
+}
+.Ulryk {cursor: all-scroll;}
+.Witold {cursor: -webkit-grab; cursor: grab;}
+
+</style>
+
+<body>
+<header>
+<p>BITWA POD GRUNWALDEM</p>
+</header>
+
+<aside>
+<p style="color:blue; font-size:20px">PUNKTY:</p>
+<div id="score">0</div>
+<p style="color:red; font-size:20px">ZYCIA:</p>
+<div id="zycia">3</div>
+<p style="color:black; font-size:20px">ZEGAR:</p>
+<div id="zegar">1410</div>
+<a style="font-size:40px" href=Bitwa.html>RESTART</a>
+</aside>
+
+<section>
+<div id="opis">Czekaj na rozkazy</div>
+
+<img src="battleMini.jpg" alt="Workplace" usemap="#workmap" style="width:1200px;height:533px;">
+
+<map name="workmap">
+  <area class="Ulryk" id="Ulryk" shape="rect" coords="286,203,392,283" alt="Computer">
+  <area class="Witold" id="Witold" shape="rect" coords="605,183,675,283" alt="Computer">
+</map>
+</section>
+
+
+</body>
+
+<script>
+  
+let counter = 0;
+let zycia = 3;
+let gameover=false;
+let czas=1410;
+
+setInterval(myFunction, Math.floor(Math.random() * 1000) + 1000);
+setInterval(odliczanie, 100);
+
+function odliczanie() {
+	if(gameover==true) {return}
+	if (czas==0) {gameover=true; alert("GAME OVER!"); return}
+	czas = czas -1;
+	document.getElementById('zegar').innerText = czas;
+	}
+
+function myFunction() {
+	if (gameover==true) {return}
+	let los=Math.floor(Math.random()*10+1);
+	if (los<=5){
+	document.getElementById('opis').innerText = "Broń Witolda"
+	} else {
+	document.getElementById('opis').innerText = "Zaatakuj Ulryka";
+	}
+}
+  
+  document.getElementById('Witold').onclick = () => {
+	if(gameover==true) {return}
+	if (document.getElementById('opis').innerText=="Broń Witolda") {
+  counter = counter + 1;
+  document.getElementById('score').innerText = counter;
+	} else {
+  zycia=zycia-1;
+  document.getElementById('zycia').innerText = zycia;
+    document.getElementById('zycia').innerText = zycia;
+	if (zycia==0) {gameover=true; alert("GAME OVER!");}
+	}
+  };
+  
+  document.getElementById('Ulryk').onclick = () => {
+	if(gameover==true) {return}
+	if (document.getElementById('opis').innerText=="Zaatakuj Ulryka") {
+  counter = counter + 1;
+  document.getElementById('score').innerText = counter;
+	} else {
+  zycia=zycia-1;
+  document.getElementById('zycia').innerText = zycia;
+    document.getElementById('zycia').innerText = zycia;
+	if (zycia==0) {gameover=true; alert("GAME OVER!");}
+	}
+  };
+
+
+</script>
